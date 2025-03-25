@@ -1,0 +1,8 @@
+# ignore all third-level directories
+!*
+!*/*
+*/*/*/
+
+# ignore tarballs
+*.tar.xz
+*.tar.gz
