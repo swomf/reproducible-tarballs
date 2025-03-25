@@ -1,0 +1,5 @@
+test "$FISH_VERSION" && echo "Doesn't work with fish" && exit
+
+SCRIPT_DIR="$(readlink -f "$(dirname "$(readlink -f "$0")")")/scripts"
+export PATH="$PATH:$SCRIPT_DIR"
+printf "==> Added $SCRIPT_DIR to \$PATH\n"
