@@ -1,16 +1,10 @@
 # Makefile rules
 
-MKT:=go-dep-tarball
-$(info Checking for $(MKT)...)
-ifeq ($(shell command -v $(MKT) 2>/dev/null),)
-$(error ==> $(MKT) not found in PATH)
-else
-$(info $(MKT) found in PATH)
-endif
-
+MKT := $(dir $(shell readlink -f $(lastword $(MAKEFILE_LIST))))scripts/go-dep-tarball
 PN := $(shell basename "$$(pwd)")
-# However, info.mk (contains VERSION, what kind, etc.)
-# should be in the same directory as the symlink
+
+# tarball.mk (contains VERSION, what kind, etc.)
+# should be in the same directory as the symlinked Makefile
 $(info Checking for tarball.mk...)
 ifneq ("$(wildcard tarball.mk)","")
 include tarball.mk
@@ -25,8 +19,6 @@ split_uri = $(word 1, $(subst ->, ,$(subst ",,$1))) $(word 2, $(subst ->, ,$(sub
 DOWNLOAD_URL = $(word 1, $(call split_uri, $(SRC_URI)))
 DOWNLOADED_TARBALL = $(word 2, $(call split_uri, $(SRC_URI)))
 OUTPUT_TARBALL = $(PN)-$(PV)-deps.tar.xz
-##################
-# init vars
 
 all: dist/$(OUTPUT_TARBALL)
 
