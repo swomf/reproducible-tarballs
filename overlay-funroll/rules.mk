@@ -34,7 +34,7 @@ $(DOWNLOADED_TARBALL):
 	@wget $(DOWNLOAD_URL) -O $@
 
 clean:
-	rm $(DOWNLOADED_TARBALL)
-	rm -r $(S)
+	$(RM) $(DOWNLOADED_TARBALL)
+	$(RM) -r $(S)
 
 .PHONY: all clean
